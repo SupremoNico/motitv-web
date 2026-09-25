@@ -135,6 +135,7 @@ export default function SeriesPage() {
       {series.length > 0 ? (
         <PosterGrid
           items={series}
+          mediaType="series"
           isLoadingMore={isFetchingNextPage}
           skeletonCount={6}
         />

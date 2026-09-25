@@ -1,5 +1,4 @@
 import { apiFetch } from "./client";
-import type { PosterItem } from "@/components/media/types";
 
 export interface MovieGenre {
     id: number;
@@ -10,30 +9,23 @@ export interface MovieGenreList {
     genres: MovieGenre[];
 }
 
-export interface Movie extends PosterItem {
+export interface Movie {
     id: number;
     title: string;
     originalTitle: string;
     overview: string;
-
     posterPath: string | null;
     posterUrl: string | null;
-
     backdropPath: string | null;
     backdropUrl: string | null;
-
     releaseDate: string | null;
-
     runtime: number | null;
     status: string;
     tagline: string | null;
-
     voteAverage: number;
     voteCount: number;
     popularity: number;
-
     genres: MovieGenre[];
-
     originalLanguage: string;
     adult: boolean;
 }
@@ -43,6 +35,33 @@ export interface MovieList {
     results: Movie[];
     totalPages: number;
     totalResults: number;
+}
+
+export interface MovieCreditPerson {
+    id: number;
+    name: string;
+    character?: string;
+    job?: string;
+    department?: string;
+    profilePath: string | null;
+}
+
+export interface MovieCredits {
+    cast: MovieCreditPerson[];
+    crew: MovieCreditPerson[];
+}
+
+export interface MovieVideo {
+    id: string;
+    key: string;
+    name: string;
+    site: string;
+    type: string;
+    official: boolean;
+}
+
+export interface MovieVideos {
+    results: MovieVideo[];
 }
 
 export async function getMovies(
@@ -63,9 +82,7 @@ export async function getMovies(
 }
 
 export async function getMovieGenres(): Promise<MovieGenreList> {
-    return apiFetch<MovieGenreList>(
-        "/movies/genres",
-    );
+    return apiFetch<MovieGenreList>("/movies/genres");
 }
 
 export async function getPopularMovies(
@@ -103,7 +120,21 @@ export async function getTopRatedMovies(
 export async function getMovie(
     id: number,
 ): Promise<Movie> {
-    return apiFetch<Movie>(
-        `/movies/${id}`,
+    return apiFetch<Movie>(`/movies/${id}`);
+}
+
+export async function getMovieCredits(
+    id: number,
+): Promise<MovieCredits> {
+    return apiFetch<MovieCredits>(
+        `/movies/${id}/credits`,
+    );
+}
+
+export async function getMovieVideos(
+    id: number,
+): Promise<MovieVideos> {
+    return apiFetch<MovieVideos>(
+        `/movies/${id}/videos`,
     );
 }

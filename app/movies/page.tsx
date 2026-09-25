@@ -158,6 +158,7 @@ export default function MoviesPage() {
 
       <PosterGrid
         items={movies}
+        mediaType="movie"
         isLoadingMore={isFetchingNextPage}
         skeletonCount={6}
       />
