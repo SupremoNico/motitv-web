@@ -58,12 +58,7 @@ a {
 
 .app-shell {
   min-height: 100vh;
-  background: radial-gradient(
-    circle at 70% 0%,
-    #171a17 0,
-    #090b0b 38%,
-    #080a0a 100%
-  );
+  background: var(--bg);
 }
 
 /* =========================
@@ -249,7 +244,9 @@ a {
 
 .main-column {
   min-width: 0;
+  min-height: 100vh;
   margin-left: 262px;
+  background: var(--bg);
 }
 
 /* =========================
@@ -546,7 +543,7 @@ a {
   z-index: 1;
   margin-top: -1px;
   padding: 18px 32px 30px;
-  background: linear-gradient(180deg, #080a0a 0%, #0a0c0c 34%, #080a0a 100%);
+  background: var(--bg);
 }
 
 /* =========================
@@ -584,17 +581,29 @@ a {
 .filter-bar {
   display: flex;
   gap: 9px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
   margin-bottom: 25px;
+  padding-bottom: 2px;
+
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-bar::-webkit-scrollbar {
+  display: none;
 }
 
 .filter-bar button {
+  flex: 0 0 auto;
   padding: 9px 17px;
   border: 1px solid var(--line);
   border-radius: 20px;
   background: #171918;
   color: #aeb1ad;
   font-size: 13px;
+  white-space: nowrap;
 }
 
 .filter-bar button:hover,
@@ -2103,4 +2112,134 @@ footer a:hover {
 ::selection {
   background: rgba(216, 146, 46, 0.3);
   color: #fff;
+}
+
+/* =========================
+   Skeletons
+========================= */
+
+.poster-skeleton {
+  pointer-events: none;
+}
+
+.skeleton-block {
+  position: relative;
+  overflow: hidden;
+  background: var(--panel);
+  border-radius: 6px;
+}
+
+.skeleton-block::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+.skeleton-poster {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.poster-skeleton .poster-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.skeleton-title {
+  width: 70%;
+  height: 14px;
+}
+
+.skeleton-rating {
+  width: 35px;
+  height: 12px;
+}
+
+.skeleton-meta {
+  width: 55%;
+  height: 11px;
+  margin-top: 8px;
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.pagination-end {
+  padding: 40px 0 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.back-to-top {
+  position: fixed;
+  top: 55px;
+  left: calc(50% + 131px);
+  z-index: 100;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--line);
+  border-radius: 50%;
+
+  background: #171918;
+  color: var(--gold);
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-to-top:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #11110d;
+  transform: translateY(-2px);
+}
+
+.back-to-top:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .back-to-top {
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .back-to-top:hover {
+    transform: translateX(-50%) translateY(-2px);
+  }
+
+  .back-to-top:active {
+    transform: translateX(-50%);
+  }
 }

@@ -1,34 +1,44 @@
 "use client";
 
-import { useState } from "react";
+interface Filter {
+  id: number;
+  name: string;
+}
 
-const genres = [
-  "All",
-  "Action",
-  "Drama",
-  "Comedy",
-  "Sci-Fi",
-  "Animation",
-  "Fantasy",
-];
+interface FilterBarProps {
+  genres: Filter[];
+  selectedGenre?: number;
+  onGenreChange: (genreId?: number) => void;
+}
 
-export function FilterBar() {
-  const [selected, setSelected] = useState("All");
-
+export function FilterBar({
+  genres,
+  selectedGenre,
+  onGenreChange,
+}: FilterBarProps) {
   return (
     <div className="filter-bar" role="group" aria-label="Filter by genre">
+      <button
+        type="button"
+        className={selectedGenre === undefined ? "selected" : ""}
+        onClick={() => onGenreChange(undefined)}
+        aria-pressed={selectedGenre === undefined}
+      >
+        All
+      </button>
+
       {genres.map((genre) => {
-        const isSelected = selected === genre;
+        const isSelected = selectedGenre === genre.id;
 
         return (
           <button
-            key={genre}
+            key={genre.id}
             type="button"
             className={isSelected ? "selected" : ""}
-            onClick={() => setSelected(genre)}
+            onClick={() => onGenreChange(genre.id)}
             aria-pressed={isSelected}
           >
-            {genre}
+            {genre.name}
           </button>
         );
       })}

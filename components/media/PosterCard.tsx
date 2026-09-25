@@ -1,49 +1,51 @@
 "use client";
 
-import { Bookmark, Play, Plus, Star } from "lucide-react";
-import type { MediaItem } from "@/types/media";
+import { Play, Plus, Star } from "lucide-react";
 
-type PosterCardProps = {
-  item: MediaItem;
-  saved?: boolean;
-  onToggleSave?: () => void;
-  onPlay?: () => void;
-};
+import type { PosterItem } from "./types";
 
-export function PosterCard({
-  item,
-  saved = false,
-  onToggleSave,
-  onPlay,
-}: PosterCardProps) {
+interface PosterCardProps {
+  item: PosterItem;
+}
+
+export function PosterCard({ item }: PosterCardProps) {
+  const year = item.releaseDate
+    ? new Date(item.releaseDate).getFullYear()
+    : null;
+
+  const genres = item.genres
+    .slice(0, 2)
+    .map((genre) => genre.name)
+    .join(" • ");
+
   return (
     <article className="poster-card">
       <div className="poster-image-wrap">
-        <img src={item.poster} alt={`${item.title} poster`} />
+        {item.posterUrl ? (
+          <img
+            src={item.posterUrl}
+            alt={`${item.title} poster`}
+            loading="lazy"
+          />
+        ) : (
+          <div className="poster-placeholder">No poster</div>
+        )}
 
         <div className="poster-hover">
           <button
+            type="button"
             className="play-round"
-            onClick={onPlay}
             aria-label={`Play ${item.title}`}
           >
             <Play size={16} fill="currentColor" />
           </button>
 
           <button
-            className={`save-round ${saved ? "saved" : ""}`}
-            onClick={onToggleSave}
-            aria-label={
-              saved
-                ? `Remove ${item.title} from My List`
-                : `Add ${item.title} to My List`
-            }
+            type="button"
+            className="save-round"
+            aria-label={`Add ${item.title} to My List`}
           >
-            {saved ? (
-              <Bookmark size={15} fill="currentColor" />
-            ) : (
-              <Plus size={17} />
-            )}
+            <Plus size={17} />
           </button>
         </div>
       </div>
@@ -53,12 +55,14 @@ export function PosterCard({
 
         <span className="rating">
           <Star size={11} fill="currentColor" />
-          {item.rating}
+          {item.voteAverage.toFixed(1)}
         </span>
       </div>
 
       <p>
-        {item.genres.join(" • ")} • {item.year}
+        {genres}
+        {genres && year ? " • " : ""}
+        {year}
       </p>
     </article>
   );

@@ -1,13 +1,13 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-import type { MediaItem } from "@/types/media";
 import { PosterGrid } from "@/components/media/PosterGrid";
+import type { PosterItem } from "@/components/media/types";
 
 type ContentRailProps = {
   title: string;
   href: string;
-  items: MediaItem[];
+  items: PosterItem[];
 };
 
 export function ContentRail({ title, href, items }: ContentRailProps) {
