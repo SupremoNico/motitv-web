@@ -3,15 +3,13 @@
 import { Bell, Menu, Search } from "lucide-react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
-export function Topbar() {
+function TopbarContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [query, setQuery] = useState(
-    searchParams.get("q") ?? ""
-  );
+  const [query, setQuery] = useState(searchParams.get("q") ?? "");
 
   const handleSearch = (value: string) => {
     setQuery(value);
@@ -61,14 +59,17 @@ export function Topbar() {
           aria-label="Open account menu"
           onClick={() => router.push("/signin")}
         >
-          <Image
-            src="/images/avatar.png"
-            alt=""
-            width={40}
-            height={40}
-          />
+          <Image src="/images/avatar.png" alt="" width={40} height={40} />
         </button>
       </div>
     </header>
+  );
+}
+
+export function Topbar() {
+  return (
+    <Suspense fallback={null}>
+      <TopbarContent />
+    </Suspense>
   );
 }
