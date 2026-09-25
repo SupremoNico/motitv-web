@@ -138,3 +138,12 @@ export async function getMovieVideos(
         `/movies/${id}/videos`,
     );
 }
+
+export async function getMovieRecommendations(
+    id: number,
+    page = 1,
+): Promise<MovieList> {
+    return apiFetch<MovieList>(
+        `/movies/${id}/recommendations?page=${page}`,
+    );
+}

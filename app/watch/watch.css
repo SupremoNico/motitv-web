@@ -1,0 +1,1935 @@
+/* =========================================
+   WATCH PAGE
+========================================= */
+
+.watch-page {
+  min-height: 100vh;
+  padding: 32px 32px 72px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* =========================================
+   PLAYER CONTAINER
+========================================= */
+
+.watch-player-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   BACK LINK
+========================================= */
+
+.watch-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 16px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.watch-back:hover {
+  color: var(--gold);
+  transform: translateX(-2px);
+}
+
+.watch-back svg {
+  flex-shrink: 0;
+}
+
+/* =========================================
+   PLAYER
+========================================= */
+
+.watch-player {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+
+  border: 1px solid var(--line);
+  border-radius: 10px;
+
+  background: #000;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.015);
+
+  isolation: isolate;
+}
+
+.watch-player video {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  background: #000;
+}
+
+/* =========================================
+   VIDEO PLACEHOLDER
+========================================= */
+
+.watch-video-placeholder {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+
+  background: var(--panel);
+}
+
+.watch-video-placeholder img,
+.watch-backdrop {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  opacity: 0.48;
+
+  filter: brightness(0.45);
+
+  user-select: none;
+}
+
+.watch-video-placeholder::after {
+  position: absolute;
+  inset: 0;
+
+  content: "";
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(216, 146, 46, 0.04),
+      transparent 42%
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.72));
+
+  pointer-events: none;
+}
+
+/* =========================================
+   PLAYER PLACEHOLDER CONTENT
+========================================= */
+
+.watch-placeholder-overlay {
+  position: absolute;
+  z-index: 2;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+.watch-placeholder-content {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  text-align: center;
+}
+
+.watch-placeholder-content strong {
+  max-width: 80%;
+
+  color: var(--text);
+
+  font-size: 16px;
+  font-weight: 600;
+
+  line-height: 1.4;
+}
+
+.watch-placeholder-content span {
+  color: var(--muted);
+
+  font-size: 13px;
+  font-weight: 500;
+
+  letter-spacing: 0.01em;
+}
+
+/* =========================================
+   LARGE PLAY BUTTON
+========================================= */
+
+.watch-placeholder-play {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 70px;
+  height: 70px;
+
+  margin-bottom: 4px;
+
+  border: 1px solid rgba(216, 146, 46, 0.45);
+  border-radius: 50%;
+
+  background: rgba(216, 146, 46, 0.1);
+
+  color: var(--gold);
+
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.35),
+    0 0 30px rgba(216, 146, 46, 0.08);
+}
+
+/* =========================================
+   PLAYER CONTROLS
+========================================= */
+
+.watch-controls {
+  position: absolute;
+  z-index: 5;
+
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 40px 18px 15px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88),
+    rgba(0, 0, 0, 0.24),
+    transparent
+  );
+}
+
+.watch-controls button {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: rgba(245, 245, 242, 0.7);
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.watch-controls button:hover {
+  background: rgba(216, 146, 46, 0.1);
+
+  color: var(--gold);
+}
+
+.watch-controls button:active {
+  transform: scale(0.94);
+}
+
+.watch-controls button svg {
+  flex-shrink: 0;
+}
+
+.watch-controls .watch-fullscreen {
+  margin-left: auto;
+}
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.watch-content {
+  width: 100%;
+  max-width: 1280px;
+
+  margin: 0 auto;
+}
+
+/* =========================================
+   MEDIA INFO
+========================================= */
+
+.watch-info {
+  width: 100%;
+
+  padding: 48px 0 56px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.watch-info-main {
+  width: 100%;
+  max-width: none;
+}
+
+/* =========================================
+   TITLE ROW
+========================================= */
+
+.watch-title-row {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 24px;
+}
+
+.watch-title-content {
+  min-width: 0;
+}
+
+.watch-media-type {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: var(--gold);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+  line-height: 1;
+}
+
+.watch-title-row h1 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 700;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.035em;
+}
+
+/* =========================================
+   TITLE LINE
+========================================= */
+
+.watch-title-line {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  min-width: 0;
+}
+
+.watch-title-row h1 {
+  min-width: 0;
+
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 700;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.035em;
+}
+
+/* =========================================
+   TITLE ACTIONS
+========================================= */
+
+.watch-title-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-shrink: 0;
+}
+
+/* =========================================
+   RATING
+========================================= */
+
+.watch-rating {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  flex-shrink: 0;
+
+  min-height: 34px;
+
+  padding: 0 10px;
+
+  border: 1px solid rgba(216, 146, 46, 0.2);
+  border-radius: 6px;
+
+  background: rgba(216, 146, 46, 0.07);
+
+  color: var(--gold);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  line-height: 1;
+}
+
+.watch-rating svg {
+  flex-shrink: 0;
+}
+
+/* =========================================
+   ADD TO LIST
+========================================= */
+
+.watch-list-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+
+  min-height: 40px;
+
+  padding: 0 15px;
+
+  border: 1px solid var(--line);
+  border-radius: 7px;
+
+  background: var(--panel);
+
+  color: rgba(245, 245, 242, 0.78);
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.watch-list-button:hover {
+  border-color: var(--gold);
+
+  background: rgba(216, 146, 46, 0.08);
+
+  color: var(--gold);
+
+  transform: translateY(-1px);
+}
+
+.watch-list-button:active {
+  transform: translateY(0);
+}
+
+.watch-list-button.is-added {
+  border-color: rgba(216, 146, 46, 0.4);
+
+  background: rgba(216, 146, 46, 0.08);
+
+  color: var(--gold);
+}
+
+.watch-list-button.is-added:hover {
+  border-color: var(--gold);
+
+  background: rgba(216, 146, 46, 0.14);
+}
+
+.watch-list-button svg {
+  flex-shrink: 0;
+}
+
+/* =========================================
+   META
+========================================= */
+
+.watch-meta {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 11px;
+
+  margin-top: 16px;
+
+  color: var(--muted);
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+.watch-dot {
+  color: rgba(216, 146, 46, 0.45);
+}
+
+/* =========================================
+   GENRES
+========================================= */
+
+.watch-genres {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 22px;
+}
+
+.watch-genres span {
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 30px;
+
+  padding: 0 11px;
+
+  border: 1px solid var(--line);
+  border-radius: 6px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  color: rgba(245, 245, 242, 0.72);
+
+  font-size: 12px;
+  font-weight: 500;
+
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.watch-genres span:hover {
+  border-color: rgba(216, 146, 46, 0.25);
+
+  background: rgba(216, 146, 46, 0.05);
+
+  color: var(--text);
+}
+
+/* =========================================
+   TAGLINE
+========================================= */
+
+.watch-tagline {
+  max-width: 900px;
+
+  margin: 24px 0 0;
+
+  color: rgba(245, 245, 242, 0.62);
+
+  font-size: 15px;
+  font-style: italic;
+
+  line-height: 1.7;
+}
+
+/* =========================================
+   OVERVIEW
+========================================= */
+
+.watch-overview {
+  width: 100%;
+  max-width: none;
+
+  margin-top: 32px;
+}
+
+.watch-overview h2 {
+  margin: 0 0 11px;
+
+  color: var(--text);
+
+  font-size: 18px;
+  font-weight: 600;
+
+  line-height: 1.4;
+}
+
+.watch-overview p {
+  max-width: 1100px;
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 15px;
+
+  line-height: 1.8;
+}
+
+/* =========================================
+   SECTION HEADING
+========================================= */
+
+.watch-section-heading {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+.watch-section-label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: rgba(216, 146, 46, 0.8);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+
+  line-height: 1;
+}
+
+.watch-section-heading h2 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 22px;
+  font-weight: 600;
+
+  line-height: 1.3;
+}
+
+.watch-section-heading p {
+  margin: 7px 0 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+/* =========================================
+   RECOMMENDATIONS
+========================================= */
+
+.watch-recommendations {
+  padding: 48px 0 20px;
+}
+
+.watch-movie-grid {
+  display: grid;
+
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  gap: 22px 18px;
+}
+
+/* =========================================
+   RECOMMENDATION CARD
+========================================= */
+
+.watch-movie-card {
+  min-width: 0;
+
+  color: inherit;
+
+  text-decoration: none;
+
+  transition: transform 0.2s ease;
+}
+
+.watch-movie-card:hover {
+  transform: translateY(-3px);
+}
+
+.watch-movie-poster {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 2 / 3;
+
+  overflow: hidden;
+
+  border: none;
+  border-radius: 8px;
+
+  background: var(--panel);
+}
+
+.watch-movie-poster img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+.watch-movie-card:hover .watch-movie-poster img {
+  transform: scale(1.035);
+
+  filter: brightness(0.72);
+}
+
+/* =========================================
+   CARD OVERLAY
+========================================= */
+
+.watch-card-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.42);
+
+  opacity: 0;
+
+  transition: opacity 0.2s ease;
+}
+
+.watch-movie-card:hover .watch-card-overlay {
+  opacity: 1;
+}
+
+/* =========================================
+   CARD PLAY BUTTON
+========================================= */
+
+.watch-card-play {
+  display: grid;
+
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: var(--gold);
+
+  color: #15130b;
+
+  box-shadow: none;
+
+  backdrop-filter: none;
+
+  transition: transform 0.2s ease;
+}
+
+.watch-card-play svg {
+  width: 20px;
+  height: 20px;
+
+  flex-shrink: 0;
+}
+
+.watch-movie-card:hover .watch-card-play {
+  transform: scale(1.06);
+}
+
+/* =========================================
+   CARD INFO
+========================================= */
+
+.watch-movie-card-info {
+  padding-top: 11px;
+}
+
+.watch-movie-card-info h3 {
+  margin: 0;
+
+  overflow: hidden;
+
+  color: rgba(245, 245, 242, 0.86);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  line-height: 1.35;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  transition: color 0.2s ease;
+}
+
+.watch-movie-card:hover .watch-movie-card-info h3 {
+  color: var(--text);
+}
+
+.watch-movie-card-meta {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 6px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+.watch-card-rating {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  color: rgba(216, 146, 46, 0.8);
+}
+
+.watch-card-rating svg {
+  flex-shrink: 0;
+}
+
+/* =========================================
+   POSTER PLACEHOLDER
+========================================= */
+
+.watch-poster-placeholder {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  background: var(--panel);
+
+  color: rgba(146, 148, 146, 0.35);
+
+  font-size: 12px;
+}
+
+/* =========================================
+   EMPTY SECTION
+========================================= */
+
+.watch-empty-section {
+  padding: 48px 0;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.watch-empty-section h2 {
+  margin: 0 0 8px;
+
+  color: rgba(245, 245, 242, 0.85);
+
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.watch-empty-section p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+/* =========================================
+   LOADING
+========================================= */
+
+.watch-loading {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 70vh;
+
+  gap: 16px;
+
+  color: var(--muted);
+
+  font-size: 14px;
+}
+
+.watch-spinner {
+  width: 30px;
+  height: 30px;
+
+  border: 2px solid rgba(255, 255, 255, 0.1);
+
+  border-top-color: var(--gold);
+
+  border-radius: 50%;
+
+  animation: watch-spin 0.8s linear infinite;
+}
+
+@keyframes watch-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   EMPTY / ERROR
+========================================= */
+
+.watch-empty {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 70vh;
+
+  padding: 24px;
+
+  text-align: center;
+}
+
+.watch-empty-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 56px;
+  height: 56px;
+
+  margin-bottom: 20px;
+
+  border: 1px solid rgba(216, 146, 46, 0.2);
+
+  border-radius: 50%;
+
+  background: rgba(216, 146, 46, 0.06);
+
+  color: rgba(216, 146, 46, 0.8);
+}
+
+.watch-empty h1 {
+  margin: 0 0 9px;
+
+  color: rgba(245, 245, 242, 0.9);
+
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.watch-empty p {
+  max-width: 460px;
+
+  margin: 0 0 22px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+.watch-back-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.watch-back-link:hover {
+  color: var(--gold);
+
+  transform: translateX(-2px);
+}
+
+/* =========================================
+   RECOMMENDATIONS LOADING
+========================================= */
+
+.watch-recommendations-loading {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 180px;
+}
+
+/* =========================================
+   NO RECOMMENDATIONS
+========================================= */
+
+.watch-no-recommendations {
+  padding: 48px 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  text-align: center;
+}
+
+/* =========================================
+   FULLSCREEN
+========================================= */
+
+.watch-player:fullscreen {
+  width: 100vw;
+  height: 100vh;
+
+  border: 0;
+  border-radius: 0;
+
+  background: #000;
+}
+
+.watch-player:fullscreen .watch-video-placeholder {
+  background: #000;
+}
+
+.watch-player:fullscreen .watch-controls {
+  padding-bottom: 20px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+  .watch-page {
+    padding: 28px 24px 60px;
+  }
+
+  .watch-movie-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .watch-title-row {
+    gap: 24px;
+  }
+
+  .watch-title-row h1 {
+    font-size: 40px;
+  }
+}
+
+/* =========================================
+   TABLET / MOBILE
+========================================= */
+
+@media (max-width: 760px) {
+  .watch-page {
+    padding: 22px 18px 50px;
+  }
+
+  .watch-player {
+    border-radius: 8px;
+  }
+
+  /* -----------------------------------------
+     DETAILS
+  ----------------------------------------- */
+
+  .watch-info {
+    padding: 36px 0 42px;
+  }
+
+  .watch-title-row {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 14px;
+  }
+
+  .watch-title-content {
+    width: 100%;
+  }
+
+  .watch-title-line {
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .watch-media-type {
+    margin-bottom: 9px;
+
+    font-size: 10px;
+  }
+
+  .watch-title-row h1 {
+    font-size: 32px;
+  }
+
+  /* -----------------------------------------
+     TITLE ACTIONS
+  ----------------------------------------- */
+
+  .watch-title-actions {
+    width: 100%;
+
+    align-items: center;
+
+    gap: 8px;
+  }
+
+  /* -----------------------------------------
+     RATING
+  ----------------------------------------- */
+
+  .watch-rating {
+    min-height: 32px;
+
+    padding: 0 9px;
+
+    font-size: 12px;
+  }
+
+  /* -----------------------------------------
+     ADD TO LIST
+  ----------------------------------------- */
+
+  .watch-list-button {
+    min-height: 38px;
+  }
+
+  /* -----------------------------------------
+     META
+  ----------------------------------------- */
+
+  .watch-meta {
+    margin-top: 14px;
+
+    font-size: 13px;
+  }
+
+  .watch-genres {
+    margin-top: 19px;
+  }
+
+  .watch-tagline {
+    margin-top: 21px;
+
+    font-size: 14px;
+  }
+
+  .watch-overview {
+    margin-top: 27px;
+  }
+
+  .watch-overview h2 {
+    font-size: 17px;
+  }
+
+  .watch-overview p {
+    max-width: none;
+
+    font-size: 14px;
+
+    line-height: 1.75;
+  }
+
+  /* -----------------------------------------
+     SECTIONS
+  ----------------------------------------- */
+
+  .watch-recommendations {
+    padding-top: 38px;
+  }
+
+  .watch-section-heading {
+    margin-bottom: 20px;
+  }
+
+  .watch-section-heading h2 {
+    font-size: 20px;
+  }
+
+  .watch-section-heading p {
+    font-size: 12px;
+  }
+
+  /* -----------------------------------------
+     GRIDS
+  ----------------------------------------- */
+
+  .watch-movie-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 20px 14px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+  .watch-page {
+    padding: 18px 14px 42px;
+  }
+
+  /* -----------------------------------------
+     PLAYER
+  ----------------------------------------- */
+
+  .watch-back {
+    margin-bottom: 12px;
+
+    font-size: 12px;
+  }
+
+  .watch-player {
+    border-radius: 6px;
+  }
+
+  .watch-placeholder-play {
+    width: 56px;
+    height: 56px;
+  }
+
+  .watch-placeholder-play svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .watch-placeholder-content {
+    gap: 8px;
+  }
+
+  .watch-placeholder-content strong {
+    max-width: 75%;
+
+    font-size: 13px;
+  }
+
+  .watch-placeholder-content span {
+    font-size: 10px;
+  }
+
+  .watch-controls {
+    padding: 28px 9px 8px;
+  }
+
+  .watch-controls button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .watch-controls button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* -----------------------------------------
+     DETAILS
+  ----------------------------------------- */
+
+  .watch-info {
+    padding: 30px 0 36px;
+  }
+
+  .watch-title-row {
+    gap: 12px;
+  }
+
+  .watch-media-type {
+    margin-bottom: 8px;
+
+    font-size: 9px;
+  }
+
+  .watch-title-row h1 {
+    font-size: 27px;
+
+    line-height: 1.12;
+  }
+
+  /* -----------------------------------------
+     TITLE ACTIONS
+  ----------------------------------------- */
+
+  .watch-title-actions {
+    width: 100%;
+
+    gap: 7px;
+  }
+
+  /* -----------------------------------------
+     RATING
+  ----------------------------------------- */
+
+  .watch-rating {
+    min-height: 36px;
+
+    padding: 0 10px;
+
+    font-size: 13px;
+  }
+
+  /* -----------------------------------------
+     ADD TO LIST
+  ----------------------------------------- */
+
+  .watch-list-button {
+    min-height: 36px;
+
+    padding: 0 11px;
+
+    font-size: 11px;
+  }
+
+  .watch-list-button svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* -----------------------------------------
+     META
+  ----------------------------------------- */
+
+  .watch-meta {
+    gap: 8px;
+
+    margin-top: 12px;
+
+    font-size: 12px;
+  }
+
+  .watch-genres {
+    gap: 6px;
+
+    margin-top: 16px;
+  }
+
+  .watch-genres span {
+    min-height: 27px;
+
+    padding: 0 9px;
+
+    font-size: 10px;
+  }
+
+  .watch-tagline {
+    margin-top: 18px;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+  }
+
+  .watch-overview {
+    margin-top: 24px;
+  }
+
+  .watch-overview h2 {
+    margin-bottom: 8px;
+
+    font-size: 16px;
+  }
+
+  .watch-overview p {
+    font-size: 13px;
+
+    line-height: 1.75;
+  }
+
+  /* -----------------------------------------
+     SECTIONS
+  ----------------------------------------- */
+
+  .watch-recommendations {
+    padding-top: 32px;
+  }
+
+  .watch-section-heading {
+    margin-bottom: 17px;
+  }
+
+  .watch-section-label {
+    margin-bottom: 6px;
+
+    font-size: 8px;
+  }
+
+  .watch-section-heading h2 {
+    font-size: 18px;
+  }
+
+  .watch-section-heading p {
+    margin-top: 5px;
+
+    font-size: 11px;
+  }
+
+  /* -----------------------------------------
+     GRIDS
+  ----------------------------------------- */
+
+  .watch-movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 18px 12px;
+  }
+
+  .watch-card-play {
+    width: 40px;
+    height: 40px;
+  }
+
+  .watch-card-play svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .watch-movie-card-info {
+    padding-top: 8px;
+  }
+
+  .watch-movie-card-info h3 {
+    font-size: 12px;
+  }
+
+  .watch-movie-card-meta {
+    margin-top: 5px;
+
+    font-size: 10px;
+  }
+
+  /* -----------------------------------------
+     EMPTY
+  ----------------------------------------- */
+
+  .watch-empty h1 {
+    font-size: 21px;
+  }
+
+  .watch-empty p {
+    font-size: 12px;
+  }
+}
+
+/* =========================================
+   SKELETON
+========================================= */
+
+.watch-skeleton-back,
+.watch-skeleton-player,
+.watch-skeleton-media-type,
+.watch-skeleton-title,
+.watch-skeleton-rating,
+.watch-skeleton-list-button,
+.watch-skeleton-meta span,
+.watch-skeleton-genres span,
+.watch-skeleton-tagline,
+.watch-skeleton-overview-heading,
+.watch-skeleton-line,
+.watch-skeleton-section-label,
+.watch-skeleton-section-title,
+.watch-skeleton-section-description,
+.watch-skeleton-poster,
+.watch-skeleton-card-title,
+.watch-skeleton-card-meta {
+  position: relative;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.watch-skeleton-back::after,
+.watch-skeleton-player::after,
+.watch-skeleton-media-type::after,
+.watch-skeleton-title::after,
+.watch-skeleton-rating::after,
+.watch-skeleton-list-button::after,
+.watch-skeleton-meta span::after,
+.watch-skeleton-genres span::after,
+.watch-skeleton-tagline::after,
+.watch-skeleton-overview-heading::after,
+.watch-skeleton-line::after,
+.watch-skeleton-section-label::after,
+.watch-skeleton-section-title::after,
+.watch-skeleton-section-description::after,
+.watch-skeleton-poster::after,
+.watch-skeleton-card-title::after,
+.watch-skeleton-card-meta::after {
+  position: absolute;
+
+  inset: 0;
+
+  content: "";
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 45%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.06) 55%,
+    transparent 100%
+  );
+
+  transform: translateX(-100%);
+
+  animation: watch-skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes watch-skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* =========================================
+   SKELETON BACK LINK
+========================================= */
+
+.watch-skeleton-back {
+  width: 115px;
+  height: 18px;
+
+  margin-bottom: 16px;
+
+  border-radius: 5px;
+}
+
+/* =========================================
+   SKELETON PLAYER
+========================================= */
+
+.watch-skeleton-player {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+
+  border: 1px solid var(--line);
+  border-radius: 10px;
+
+  background: #101211;
+}
+
+.watch-skeleton-player-icon {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 58px;
+  height: 58px;
+
+  border: 1px solid rgba(216, 146, 46, 0.12);
+
+  border-radius: 50%;
+
+  background: rgba(216, 146, 46, 0.04);
+
+  transform: translate(-50%, -50%);
+}
+
+/* =========================================
+   SKELETON TITLE
+========================================= */
+
+.watch-skeleton-title-row {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 24px;
+}
+
+.watch-skeleton-title-content {
+  min-width: 0;
+
+  width: 100%;
+}
+
+.watch-skeleton-media-type {
+  width: 55px;
+  height: 11px;
+
+  margin-bottom: 12px;
+
+  border-radius: 3px;
+}
+
+.watch-skeleton-title {
+  width: min(520px, 65%);
+
+  height: 48px;
+
+  border-radius: 6px;
+}
+
+/* =========================================
+   SKELETON TITLE ACTIONS
+========================================= */
+
+.watch-skeleton-title-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-shrink: 0;
+}
+
+/* =========================================
+   SKELETON RATING
+========================================= */
+
+.watch-skeleton-rating {
+  flex-shrink: 0;
+
+  width: 74px;
+  height: 40px;
+
+  border-radius: 7px;
+}
+
+/* =========================================
+   SKELETON ADD TO LIST
+========================================= */
+
+.watch-skeleton-list-button {
+  flex-shrink: 0;
+
+  width: 112px;
+  height: 40px;
+
+  border-radius: 7px;
+}
+
+/* =========================================
+   SKELETON META
+========================================= */
+
+.watch-skeleton-meta {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 17px;
+}
+
+.watch-skeleton-meta span {
+  width: 52px;
+  height: 14px;
+
+  border-radius: 4px;
+}
+
+.watch-skeleton-meta span:nth-child(2) {
+  width: 68px;
+}
+
+.watch-skeleton-meta span:nth-child(3) {
+  width: 72px;
+}
+
+/* =========================================
+   SKELETON GENRES
+========================================= */
+
+.watch-skeleton-genres {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 22px;
+}
+
+.watch-skeleton-genres span {
+  width: 68px;
+  height: 30px;
+
+  border-radius: 6px;
+}
+
+.watch-skeleton-genres span:nth-child(2) {
+  width: 82px;
+}
+
+.watch-skeleton-genres span:nth-child(3) {
+  width: 72px;
+}
+
+.watch-skeleton-genres span:nth-child(4) {
+  width: 92px;
+}
+
+/* =========================================
+   SKELETON TAGLINE
+========================================= */
+
+.watch-skeleton-tagline {
+  width: min(700px, 75%);
+
+  height: 16px;
+
+  margin-top: 25px;
+
+  border-radius: 4px;
+}
+
+/* =========================================
+   SKELETON OVERVIEW
+========================================= */
+
+.watch-skeleton-overview {
+  width: 100%;
+
+  margin-top: 34px;
+}
+
+.watch-skeleton-overview-heading {
+  width: 105px;
+  height: 22px;
+
+  margin-bottom: 13px;
+
+  border-radius: 5px;
+}
+
+.watch-skeleton-line {
+  width: min(1100px, 90%);
+
+  height: 15px;
+
+  margin-bottom: 10px;
+
+  border-radius: 4px;
+}
+
+.watch-skeleton-line-short {
+  width: min(780px, 65%);
+}
+
+/* =========================================
+   SKELETON RECOMMENDATIONS
+========================================= */
+
+.watch-skeleton-recommendations {
+  overflow: hidden;
+}
+
+.watch-skeleton-section-label {
+  width: 60px;
+  height: 10px;
+
+  margin-bottom: 8px;
+
+  border-radius: 3px;
+}
+
+.watch-skeleton-section-title {
+  width: 170px;
+  height: 26px;
+
+  border-radius: 5px;
+}
+
+.watch-skeleton-section-description {
+  width: 220px;
+  height: 13px;
+
+  margin-top: 8px;
+
+  border-radius: 4px;
+}
+
+/* =========================================
+   SKELETON POSTER
+========================================= */
+
+.watch-skeleton-poster {
+  width: 100%;
+
+  aspect-ratio: 2 / 3;
+
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.045);
+}
+
+/* =========================================
+   SKELETON CARD INFO
+========================================= */
+
+.watch-skeleton-card-title {
+  width: 75%;
+  height: 14px;
+
+  margin-top: 12px;
+
+  border-radius: 4px;
+}
+
+.watch-skeleton-card-meta {
+  width: 45%;
+  height: 11px;
+
+  margin-top: 7px;
+
+  border-radius: 4px;
+}
+
+/* =========================================
+   SKELETON RESPONSIVE
+========================================= */
+
+@media (max-width: 760px) {
+  .watch-skeleton-title-row {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 14px;
+  }
+
+  .watch-skeleton-title-actions {
+    width: 100%;
+
+    gap: 8px;
+  }
+
+  .watch-skeleton-rating {
+    height: 38px;
+  }
+
+  .watch-skeleton-list-button {
+    height: 38px;
+  }
+}
+
+@media (max-width: 480px) {
+  .watch-skeleton-title-row {
+    gap: 12px;
+  }
+
+  .watch-skeleton-title-actions {
+    gap: 7px;
+  }
+
+  .watch-skeleton-rating {
+    width: 66px;
+    height: 36px;
+  }
+
+  .watch-skeleton-list-button {
+    width: 102px;
+    height: 36px;
+  }
+}

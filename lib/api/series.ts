@@ -152,3 +152,35 @@ export async function getPopularSeries(
         `/series/popular?page=${page}`,
     );
 }
+
+export async function getSeriesRecommendations(
+    id: number,
+): Promise<SeriesList> {
+    const response = await apiFetch<{
+        page: number;
+        results: SeriesApiListItem[];
+        totalPages: number;
+        totalResults: number;
+    }>(
+        `/series/${id}/recommendations`,
+    );
+
+    return {
+        page: response.page,
+        totalPages: response.totalPages,
+        totalResults: response.totalResults,
+        results: response.results.map(
+            (series) => ({
+                id: series.id,
+                title: series.name,
+                overview: series.overview,
+                posterUrl: series.posterUrl,
+                releaseDate:
+                    series.firstAirDate,
+                voteAverage:
+                    series.voteAverage,
+                genres: series.genres,
+            }),
+        ),
+    };
+}

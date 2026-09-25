@@ -156,6 +156,8 @@ export function MediaDetailsModal({
 
   const { data, isLoading, isError } = useMediaDetails(mediaId, mediaType);
 
+  const [isOpening, setIsOpening] = useState(false);
+
   /* =========================================================
      CLEANUP PLAYER
      ========================================================= */
@@ -355,17 +357,20 @@ export function MediaDetailsModal({
      ========================================================= */
 
   const handlePlay = () => {
-    if (!data) {
+    if (!data || isOpening) {
       return;
     }
 
-    if (data.type === "movie") {
-      router.push(`/watch?movie=${data.id}`);
+    setIsOpening(true);
 
-      return;
-    }
+    window.setTimeout(() => {
+      if (data.type === "movie") {
+        router.push(`/watch?movie=${data.id}`);
+        return;
+      }
 
-    router.push(`/watch?series=${data.id}`);
+      router.push(`/watch?series=${data.id}`);
+    }, 250);
   };
 
   /* =========================================================
@@ -568,11 +573,23 @@ export function MediaDetailsModal({
               <div className="modal-actions">
                 <button
                   type="button"
-                  className="modal-play-button"
+                  className={`modal-play-button ${
+                    isOpening ? "is-opening" : ""
+                  }`}
                   onClick={handlePlay}
+                  disabled={isOpening}
                 >
-                  <Play size={17} fill="currentColor" />
-                  Play
+                  {isOpening ? (
+                    <>
+                      <span className="modal-play-spinner" />
+                      Opening...
+                    </>
+                  ) : (
+                    <>
+                      <Play size={17} fill="currentColor" />
+                      Play
+                    </>
+                  )}
                 </button>
 
                 <button type="button" className="modal-list-button">
